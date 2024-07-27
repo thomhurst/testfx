@@ -26,11 +26,12 @@ public sealed partial class PropertyBag
     internal PropertyBag(IEnumerable<IProperty> properties, TestNodeStateProperty testNodeStateProperty)
     {
         ArgumentGuard.IsNotNull(properties);
+        ArgumentGuard.IsNotNull(testNodeStateProperty);
+
+        _testNodeStateProperty = testNodeStateProperty;
 
         foreach (IProperty property in properties)
         {
-            _testNodeStateProperty = testNodeStateProperty;
-
             if (_property is null)
             {
                 _property = new(property);
