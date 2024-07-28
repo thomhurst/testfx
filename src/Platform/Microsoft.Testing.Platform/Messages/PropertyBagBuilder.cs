@@ -3,19 +3,17 @@
 
 namespace Microsoft.Testing.Platform.Extensions.Messages;
 
-public class PropertyBagBuilder
+public class PropertyBagBuilder : List<IProperty>
 {
-    public List<IProperty> Properties { get; init; } = [];
-
-    public PropertyBagBuilder Add(IProperty property)
+    public new PropertyBagBuilder Add(IProperty property)
     {
-        Properties.Add(property);
+        base.Add(property);
         return this;
     }
 
     public PropertyBag ToImmutablePropertyBag(TestNodeStateProperty currentState)
     {
-        IEnumerable<IProperty> nonTestStateProperties = Properties.Where(x => x is not TestNodeStateProperty);
+        IEnumerable<IProperty> nonTestStateProperties = this.Where(x => x is not TestNodeStateProperty);
 
         return new PropertyBag(nonTestStateProperties, currentState);
     }
