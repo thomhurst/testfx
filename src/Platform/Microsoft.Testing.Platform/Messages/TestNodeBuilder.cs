@@ -11,11 +11,17 @@ public class TestNodeBuilder
 
     public PropertyBagBuilder Properties { get; init; } = new();
 
+    public TestNodeBuilder WithProperty(IProperty property)
+    {
+        Properties.Add(property);
+        return this;
+    }
+
     public TestNode ToImmutableTestNode(TestNodeStateProperty currentState) =>
         new()
         {
-            Uid = Uid, 
-            DisplayName = DisplayName, 
+            Uid = Uid,
+            DisplayName = DisplayName,
             Properties = Properties.ToImmutablePropertyBag(currentState)
         };
 }
