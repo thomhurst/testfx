@@ -18,10 +18,5 @@ public class TestNodeBuilder
     }
 
     public TestNode ToImmutableTestNode(TestNodeStateProperty currentState) =>
-        new()
-        {
-            Uid = Uid,
-            DisplayName = DisplayName,
-            Properties = Properties.ToImmutablePropertyBag(currentState)
-        };
+        new(Uid, DisplayName, Properties.ToImmutablePropertyBag(currentState));
 }
