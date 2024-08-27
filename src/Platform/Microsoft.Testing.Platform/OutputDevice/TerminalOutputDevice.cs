@@ -130,23 +130,20 @@ internal partial class TerminalOutputDevice : IPlatformOutputDevice,
             showPassed = true;
         }
 
-        Func<bool?> shouldShowProgress = noProgress
-            // User preference is to not show progress.
-            ? () => false
-            // User preference is to allow showing progress, figure if we should actually show it based on whether or not we are a testhost controller.
-            //
+        // The test host controller info is not setup and populated until after this constructor, because it writes banner and then after it figures out if
+        // the runner is a testHost controller, so we would always have it as null if we capture it directly. Instead we need to check it via
+        // func.
+        Func<bool?> shouldShowProgress;
+        // User preference is to not show progress.
+        if (noProgress || _isVSTestMode || _isListTests)
+        {
+            shouldShowProgress = () => false;
+        }
+        else
+        {
             // TestHost controller is not running any tests and it should not be writing progress.
-            //
-            // The test host controller info is not setup and populated until after this constructor, because it writes banner and then after it figures out if
-            // the runner is a testHost controller, so we would always have it as null if we capture it directly. Instead we need to check it via
-            // func.
-            : () => _isVSTestMode
-                ? false
-                : _isListTests
-                    ? false
-                    : _testHostControllerInfo.IsCurrentProcessTestHostController == null
-                        ? null
-                        : !_testHostControllerInfo.IsCurrentProcessTestHostController;
+            shouldShowProgress = () => !_testHostControllerInfo.IsCurrentProcessTestHostController;
+        }
 
         // This is single exe run, don't show all the details of assemblies and their summaries.
         _terminalTestReporter = new TerminalTestReporter(_console, new()
