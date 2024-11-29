@@ -7,5 +7,5 @@ public sealed class AggregateFilter(params IReadOnlyList<ITestExecutionFilter> f
 {
     public IReadOnlyList<ITestExecutionFilter> Filters { get; } = filters;
 
-    public bool ShouldUse => true;
+    public bool IsAvailable => true;
 }

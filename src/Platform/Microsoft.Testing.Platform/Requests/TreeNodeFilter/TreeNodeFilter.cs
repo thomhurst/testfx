@@ -28,9 +28,9 @@ public sealed class TreeNodeFilter : ITestExecutionFilter
 
     internal TreeNodeFilter(ICommandLineOptions commandLineOptions)
     {
-        ShouldUse = commandLineOptions.IsOptionSet(TreeNodeFilterCommandLineOptionsProvider.TreenodeFilter);
+        IsAvailable = commandLineOptions.IsOptionSet(TreeNodeFilterCommandLineOptionsProvider.TreenodeFilter);
 
-        if (ShouldUse)
+        if (IsAvailable)
         {
             commandLineOptions.TryGetOptionArgumentList(
                 TreeNodeFilterCommandLineOptionsProvider.TreenodeFilter,
@@ -530,5 +530,5 @@ public sealed class TreeNodeFilter : ITestExecutionFilter
             _ => throw ApplicationStateGuard.Unreachable(),
         };
 
-    public bool ShouldUse { get; }
+    public bool IsAvailable { get; }
 }

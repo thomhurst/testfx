@@ -21,5 +21,5 @@ public sealed class TestNodeUidListFilter : ITestExecutionFilter
     /// </summary>
     public TestNodeUid[] TestNodeUids { get; }
 
-    public bool ShouldUse => TestNodeUids.Length > 1;
+    public bool IsAvailable => TestNodeUids.Length > 1;
 }

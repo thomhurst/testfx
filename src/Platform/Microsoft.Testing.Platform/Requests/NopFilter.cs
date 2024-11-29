@@ -11,5 +11,5 @@ namespace Microsoft.Testing.Platform.Requests;
 [SuppressMessage("ApiDesign", "RS0016:Add public types and members to the declared API", Justification = "Experimental API")]
 public sealed class NopFilter : ITestExecutionFilter
 {
-    public bool ShouldUse => true;
+    public bool IsAvailable => true;
 }

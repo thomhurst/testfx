@@ -8,5 +8,5 @@ namespace Microsoft.Testing.Platform.Requests;
 /// </summary>
 public interface ITestExecutionFilter
 {
-    bool ShouldUse { get; }
+    bool IsAvailable { get; }
 }

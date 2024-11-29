@@ -81,7 +81,7 @@ internal sealed class TestHostManager : ITestHostManager
         }
 
         ITestExecutionFilter[] requestedFilters = list
-            .Where(x => x.ShouldUse)
+            .Where(x => x.IsAvailable)
             .ToArray();
 
         if (requestedFilters.Length == 0)
