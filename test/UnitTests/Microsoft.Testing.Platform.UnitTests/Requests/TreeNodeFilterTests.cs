@@ -135,7 +135,7 @@ public class TreeNodeFilterTests : TestBase
     [Arguments("/A%2FB[Other%2Fthing=KeyWithSlash]", "/A%2FB", false)]
     public void PropertiesDoNotNeedUrlEncodingOfSlashes(string filter, string nodePath, bool isMatched)
     {
-        TreeNodeFilter filterInstance = BuildFilter(d(filter);
+        TreeNodeFilter filterInstance = BuildFilter(filter);
         PropertyBag nodeProperties = new(
             new KeyValuePairStringProperty("Tag", "Fast"),
             new KeyValuePairStringProperty("ValueWithSlash", "Some/thing"),
