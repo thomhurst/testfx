@@ -449,7 +449,6 @@ static Microsoft.Testing.Platform.Services.ServiceProviderExtensions.GetMessageB
 static Microsoft.Testing.Platform.Services.ServiceProviderExtensions.GetOutputDevice(this System.IServiceProvider! serviceProvider) -> Microsoft.Testing.Platform.OutputDevice.IOutputDevice!
 static Microsoft.Testing.Platform.Services.ServiceProviderExtensions.GetRequiredService<TService>(this System.IServiceProvider! provider) -> TService
 static Microsoft.Testing.Platform.Services.ServiceProviderExtensions.GetService<TService>(this System.IServiceProvider! provider) -> TService?
-static Microsoft.Testing.Platform.Services.ServiceProviderExtensions.GetServices<TService>(this System.IServiceProvider! provider) -> System.Collections.Generic.IEnumerable<TService>
 static readonly Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity.ExactlyOne -> Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity
 static readonly Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity.OneOrMore -> Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity
 static readonly Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity.Zero -> Microsoft.Testing.Platform.Extensions.CommandLine.ArgumentArity
