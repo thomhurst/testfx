@@ -3,8 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-using Microsoft.Testing.Platform.Services;
-
 namespace Microsoft.Testing.Platform.Requests;
 
 [Experimental("TPEXP", UrlFormat = "https://aka.ms/testingplatform/diagnostics#{0}")]

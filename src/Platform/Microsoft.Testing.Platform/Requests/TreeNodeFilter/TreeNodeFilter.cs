@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using Microsoft.Testing.Platform.CommandLine;
-using Microsoft.Testing.Platform.Extensions.CommandLine;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Helpers;
 using Microsoft.Testing.Platform.Resources;
