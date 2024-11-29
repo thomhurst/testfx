@@ -421,7 +421,7 @@ internal sealed partial class ServerTestHost : CommonTestHost, IServerTestHost, 
         perRequestTestSessionContext.CancellationToken.ThrowIfCancellationRequested();
 
         ICollection<TestNode>? testNodes = args.TestNodes;
-        ITestExecutionFilter executionFilter = await _testSessionManager.BuildFilter(ServiceProvider, testNodes);
+        ITestExecutionFilter executionFilter = await _testSessionManager.BuildFilterAsync(ServiceProvider, testNodes);
 
         ServerTestExecutionRequestFactory requestFactory = new(session =>
             method == JsonRpcMethods.TestingRunTests

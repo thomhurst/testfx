@@ -61,7 +61,8 @@ internal sealed class TestHostManager : ITestHostManager
         return ActionResult.Fail<ITestFrameworkInvoker>();
     }
 
-    internal async Task<ITestExecutionFilter> BuildFilter(ServiceProvider serviceProvider,
+    internal async Task<ITestExecutionFilter> BuildFilterAsync(
+        ServiceProvider serviceProvider,
         ICollection<TestNode>? testNodes)
     {
         if (testNodes?.Count > 0)

@@ -51,7 +51,7 @@ internal sealed class ConsoleTestHost(
         ITestFrameworkInvoker testAdapterInvoker = ServiceProvider.GetService<ITestFrameworkInvoker>()
             ?? new TestHostTestFrameworkInvoker(ServiceProvider);
 
-        ITestExecutionFilter filter = await _testHostManager.BuildFilter(ServiceProvider, []);
+        ITestExecutionFilter filter = await _testHostManager.BuildFilterAsync(ServiceProvider, []);
 
         ServiceProvider.TryAddService(new Services.TestSessionContext(abortRun));
         ITestFramework testFramework = await _buildTestFrameworkAsync(new(
