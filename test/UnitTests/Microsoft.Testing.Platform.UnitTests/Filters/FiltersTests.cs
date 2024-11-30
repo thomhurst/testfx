@@ -77,8 +77,8 @@ public sealed class FiltersTests
         });
 
         Assert.IsTrue(testExecutionFilter is AggregateFilter);
-        Assert.IsTrue(((AggregateFilter)testExecutionFilter).Filters[0] is Filter1);
-        Assert.IsTrue(((AggregateFilter)testExecutionFilter).Filters[1] is Filter2);
+        Assert.IsTrue(((AggregateFilter)testExecutionFilter).InnerFilters[0] is Filter1);
+        Assert.IsTrue(((AggregateFilter)testExecutionFilter).InnerFilters[1] is Filter2);
     }
 
     private static async Task<ITestExecutionFilter> GetBuiltFilter(Action<ITestHostManager> action)

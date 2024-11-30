@@ -3,9 +3,9 @@
 
 namespace Microsoft.Testing.Platform.Requests;
 
-public sealed class AggregateFilter(params IReadOnlyList<ITestExecutionFilter> filters) : ITestExecutionFilter
+public sealed class AggregateFilter(params IReadOnlyList<ITestExecutionFilter> innerFilters) : ITestExecutionFilter
 {
-    public IReadOnlyList<ITestExecutionFilter> Filters { get; } = filters;
+    public IReadOnlyList<ITestExecutionFilter> InnerFilters { get; } = innerFilters;
 
     public bool IsAvailable => true;
 }
