@@ -1,9 +1,5 @@
 #nullable enable
 Microsoft.Testing.Platform.Extensions.Messages.TestMetadataProperty.TestMetadataProperty(string! key) -> void
-Microsoft.Testing.Platform.Requests.AggregateFilter
-Microsoft.Testing.Platform.Requests.AggregateFilter.AggregateFilter(params System.Collections.Generic.IReadOnlyList<Microsoft.Testing.Platform.Requests.ITestExecutionFilter!>! filters) -> void
-Microsoft.Testing.Platform.Requests.AggregateFilter.Filters.get -> System.Collections.Generic.IReadOnlyList<Microsoft.Testing.Platform.Requests.ITestExecutionFilter!>!
-Microsoft.Testing.Platform.Requests.AggregateFilter.IsAvailable.get -> bool
 Microsoft.Testing.Platform.Requests.ITestExecutionFilter.IsAvailable.get -> bool
 Microsoft.Testing.Platform.Requests.TestNodeUidListFilter.IsAvailable.get -> bool
 Microsoft.Testing.Platform.TestHost.ITestHostManager.RegisterTestExecutionFilter(System.Func<System.IServiceProvider!, Microsoft.Testing.Platform.Requests.ITestExecutionFilter!>! testFilterFactory) -> void
