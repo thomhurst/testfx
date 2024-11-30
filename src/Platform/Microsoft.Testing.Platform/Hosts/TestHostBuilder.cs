@@ -490,7 +490,6 @@ internal class TestHostBuilder(IFileSystem fileSystem, IRuntimeFeature runtimeFe
         }
         else
         {
-            // Add custom ITestExecutionFilterFactory to the service list if available
             ActionResult<ITestFrameworkInvoker> testAdapterInvokerBuilderResult = await ((TestHostManager)TestHost).TryBuildTestAdapterInvokerAsync(serviceProvider);
             if (testAdapterInvokerBuilderResult.IsSuccess)
             {
