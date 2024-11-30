@@ -90,7 +90,7 @@ internal sealed class TestHostManager : ITestHostManager
 #pragma warning restore TPEXP
         }
 
-        return requestedFilters.Length == 1 ? requestedFilters[0] : new AggregateFilter(list);
+        return requestedFilters.Length == 1 ? requestedFilters[0] : new AggregateFilter(requestedFilters);
     }
 
     public void AddTestApplicationLifecycleCallbacks(Func<IServiceProvider, ITestApplicationLifecycleCallbacks> testApplicationLifecycleCallbacks)
