@@ -151,7 +151,7 @@ public class TreeNodeFilterTests : TestBase
         }
     }
 
-    private TreeNodeFilter BuildFilter(string filterQuery) => new TreeNodeFilter(new TestCommandLineOptions(new Dictionary<string, string[]>
+    private TreeNodeFilter BuildFilter(string filterQuery) => new(new TestCommandLineOptions(new Dictionary<string, string[]>
     {
         [TreeNodeFilterCommandLineOptionsProvider.TreenodeFilter] = [filterQuery],
     }));
