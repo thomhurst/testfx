@@ -241,7 +241,6 @@ namespace MSTestSdkTest
     //         testHostResult.AssertOutputContainsSummary(0, 1, 0);
     //     }
     // }
-
     public static IEnumerable<TestArgumentsEntry<(string MultiTfm, BuildConfiguration BuildConfiguration, bool EnableDefaultExtensions)>> RunTests_With_MSTestRunner_Standalone_Default_Extensions_Data()
     {
         foreach (TestArgumentsEntry<(string MultiTfm, BuildConfiguration BuildConfiguration)> buildConfig in GetBuildMatrixMultiTfmFoldedBuildConfiguration())
@@ -284,7 +283,6 @@ namespace MSTestSdkTest
     //         }
     //     }
     // }
-
     [ArgumentsProvider(nameof(GetBuildMatrixMultiTfmFoldedBuildConfiguration))]
     public async Task Invalid_TestingProfile_Name_Should_Fail(string multiTfm, BuildConfiguration buildConfiguration)
     {
