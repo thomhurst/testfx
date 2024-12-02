@@ -29,10 +29,6 @@ internal sealed class ConsoleTestHost(
 
     private readonly ILogger<ConsoleTestHost> _logger = serviceProvider.GetLoggerFactory().CreateLogger<ConsoleTestHost>();
     private readonly IClock _clock = serviceProvider.GetClock();
-    private readonly Func<TestFrameworkBuilderData, Task<ITestFramework>> _buildTestFrameworkAsync = buildTestFrameworkAsync;
-
-    private readonly TestFrameworkManager _testFrameworkManager = testFrameworkManager;
-    private readonly TestHostManager _testHostManager = testHostManager;
 
     protected override bool RunTestApplicationLifeCycleCallbacks => true;
 
@@ -51,17 +47,17 @@ internal sealed class ConsoleTestHost(
         ITestFrameworkInvoker testAdapterInvoker = ServiceProvider.GetService<ITestFrameworkInvoker>()
             ?? new TestHostTestFrameworkInvoker(ServiceProvider);
 
-        ITestExecutionFilter filter = await _testHostManager.BuildFilterAsync(ServiceProvider, []);
+        ITestExecutionFilter filter = await testHostManager.BuildFilterAsync(ServiceProvider, []);
 
         ServiceProvider.TryAddService(new Services.TestSessionContext(abortRun));
-        ITestFramework testFramework = await _buildTestFrameworkAsync(new(
+        ITestFramework testFramework = await buildTestFrameworkAsync(new TestFrameworkBuilderData(
             ServiceProvider,
             new ConsoleTestExecutionRequestFactory(ServiceProvider.GetCommandLineOptions(), filter),
             testAdapterInvoker,
             ServiceProvider.GetPlatformOutputDevice(),
             [],
-            _testFrameworkManager,
-            _testHostManager,
+            testFrameworkManager,
+            testHostManager,
             new MessageBusProxy(),
             ServiceProvider.GetCommandLineOptions().IsOptionSet(PlatformCommandLineProvider.DiscoverTestsOptionKey),
             false));

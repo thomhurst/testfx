@@ -3,6 +3,7 @@
 
 using System.Globalization;
 
+using Microsoft.Testing.Platform.Capabilities.TestFramework;
 using Microsoft.Testing.Platform.Extensions;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestHost;
@@ -32,6 +33,7 @@ internal sealed class TestHostManager : ITestHostManager
     public void AddTestFrameworkInvoker(Func<IServiceProvider, ITestFrameworkInvoker> testFrameworkInvokerFactory)
     {
         Guard.NotNull(testFrameworkInvokerFactory);
+
         if (_testFrameworkInvokerFactory is not null)
         {
             throw new InvalidOperationException(PlatformResources.TestAdapterInvokerFactoryAlreadySetErrorMessage);
@@ -60,8 +62,8 @@ internal sealed class TestHostManager : ITestHostManager
         return ActionResult.Fail<ITestFrameworkInvoker>();
     }
 
-    internal async Task<ITestExecutionFilter> BuildFilterAsync(
-        ServiceProvider serviceProvider,
+    public async Task<ITestExecutionFilter> BuildFilterAsync(
+        IServiceProvider serviceProvider,
         ICollection<TestNode>? testNodes)
     {
         if (testNodes?.Count > 0)
@@ -71,12 +73,22 @@ internal sealed class TestHostManager : ITestHostManager
 
         List<ITestExecutionFilter> list = [];
 
-        foreach (ITestExecutionFilter executionFilterFactory in _testExecutionFilterFactories
+        ISupportsFilterCapability[] filterCapabilities = serviceProvider.GetTestFrameworkCapabilities()
+            .Capabilities
+            .OfType<ISupportsFilterCapability>()
+            .ToArray();
+
+        foreach (ITestExecutionFilter testExecutionFilter in _testExecutionFilterFactories
                      .Select(testExecutionFilterFactory => testExecutionFilterFactory(serviceProvider)))
         {
-            await executionFilterFactory.TryInitializeAsync();
+            if (filterCapabilities.SingleOrDefault(x => x.FilterType == testExecutionFilter.GetType()) is null)
+            {
+                continue;
+            }
 
-            list.Add(executionFilterFactory);
+            await testExecutionFilter.TryInitializeAsync();
+
+            list.Add(testExecutionFilter);
         }
 
         ITestExecutionFilter[] requestedFilters = list
