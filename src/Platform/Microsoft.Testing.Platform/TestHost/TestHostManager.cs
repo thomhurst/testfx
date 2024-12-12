@@ -3,7 +3,6 @@
 
 using System.Globalization;
 
-using Microsoft.Testing.Platform.Capabilities.TestFramework;
 using Microsoft.Testing.Platform.Extensions;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestHost;
@@ -73,19 +72,9 @@ internal sealed class TestHostManager : ITestHostManager
 
         List<ITestExecutionFilter> list = [];
 
-        ISupportsFilterCapability[] filterCapabilities = serviceProvider.GetTestFrameworkCapabilities()
-            .Capabilities
-            .OfType<ISupportsFilterCapability>()
-            .ToArray();
-
         foreach (ITestExecutionFilter testExecutionFilter in _testExecutionFilterFactories
                      .Select(testExecutionFilterFactory => testExecutionFilterFactory(serviceProvider)))
         {
-            if (filterCapabilities.SingleOrDefault(x => x.FilterType == testExecutionFilter.GetType()) is null)
-            {
-                continue;
-            }
-
             await testExecutionFilter.TryInitializeAsync();
 
             list.Add(testExecutionFilter);

@@ -15,6 +15,8 @@ using Microsoft.Testing.Platform.TestHost;
 
 using Moq;
 
+using TestNode = Microsoft.Testing.Platform.Extensions.Messages.TestNode;
+
 #pragma warning disable TPEXP
 
 namespace Microsoft.Testing.Platform.UnitTests.Filters;
@@ -111,11 +113,15 @@ public sealed class FiltersTests
     private class Filter1 : ITestExecutionFilter
     {
         public bool IsAvailable { get; set; } = true;
+
+        public bool MatchesFilter(TestNode testNode) => true;
     }
 
     private class Filter2 : ITestExecutionFilter
     {
         public bool IsAvailable { get; set; } = true;
+
+        public bool MatchesFilter(TestNode testNode) => true;
     }
 
     private class DummyFramework : ITestFramework
