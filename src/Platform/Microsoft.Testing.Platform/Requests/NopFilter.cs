@@ -3,6 +3,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+using Microsoft.Testing.Platform.Extensions.Messages;
+
 namespace Microsoft.Testing.Platform.Requests;
 
 [Experimental("TPEXP", UrlFormat = "https://aka.ms/testingplatform/diagnostics#{0}")]
@@ -10,4 +12,6 @@ namespace Microsoft.Testing.Platform.Requests;
 public sealed class NopFilter : ITestExecutionFilter
 {
     public bool IsAvailable => true;
+
+    public bool MatchesFilter(TestNode testNode) => true;
 }

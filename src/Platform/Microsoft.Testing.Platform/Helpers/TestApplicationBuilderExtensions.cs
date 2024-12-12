@@ -20,7 +20,6 @@ public static class TestApplicationBuilderExtensions
         testApplicationBuilder.CommandLine.AddProvider(() => new TreeNodeFilterCommandLineOptionsProvider(extension));
         testApplicationBuilder.TestHost.RegisterTestExecutionFilter(sp => new TreeNodeFilter(sp.GetCommandLineOptions()));
     }
-        => testApplicationBuilder.CommandLine.AddProvider(() => new TreeNodeFilterCommandLineOptionsProvider(extension));
 
     /// <summary>
     /// Registers the command-line options provider for '--maximum-failed-tests'.

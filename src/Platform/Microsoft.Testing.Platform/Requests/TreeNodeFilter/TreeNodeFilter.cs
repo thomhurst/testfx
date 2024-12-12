@@ -3,6 +3,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -530,4 +531,24 @@ public sealed class TreeNodeFilter : ITestExecutionFilter
         };
 
     public bool IsAvailable { get; }
+
+    public bool MatchesFilter(TestNode testNode)
+    {
+        string path = BuildNodePath(testNode);
+
+        return MatchesFilter(path, testNode.Properties);
+    }
+
+    private static string BuildNodePath(TestNode testNode)
+    {
+        TestMethodIdentifierProperty? testMethodIdentifier = testNode.Properties.SingleOrDefault<TestMethodIdentifierProperty>();
+
+        if (testMethodIdentifier is null)
+        {
+            return "/*/*/*/*";
+        }
+
+        string? assembly = testMethodIdentifier.AssemblyFullName.Split(',').FirstOrDefault();
+        return $"/{assembly}/{testMethodIdentifier.Namespace}/{testMethodIdentifier.TypeName}/{testMethodIdentifier.MethodName}";
+    }
 }
