@@ -4,3 +4,4 @@
 - 2026-10-25: run 2; scanned for polling/sleep in src/Platform; no PR. Backlog cursor: review Thread.Sleep/Task.Delay hits.
 - 2026-10-26: run 3; reviewed Delay hits, only CountDownEventExtensions polling looks candidate; no PR.
 - 2026-10-27: run 4; CountDownEvent polling is wasm-only, no alternative; no PR. Backlog: scan allocations in hot paths next.
+- 2026-11-01: run 5; no new findings, no PR. Monthly issue rollover to 2026-11 pending.
